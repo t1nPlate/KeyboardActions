@@ -30,28 +30,47 @@ public class SimpleMoving {
         panel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_DOWN -> {
-                        if(label.getY() >= HEIGHT - label.getHeight()*2)
-                            label.setLocation(label.getX(), 0);
-                        label.setLocation(label.getX(), label.getY() + 15);
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_DOWN -> {
+                            if(label.getY() >= HEIGHT - label.getHeight()*2)
+                                label.setLocation(label.getX(), 0);
+                            if(e.isShiftDown()) {
+                                label.setLocation(label.getX(), label.getY() + 30);
+                            } else {
+                                label.setLocation(label.getX(), label.getY() + 15);
+                            }
+                        }
+                        case KeyEvent.VK_UP -> {
+                            if(label.getY() - 15 <= 0)
+                                label.setLocation(label.getX(), HEIGHT-label.getHeight()*2+30);
+                            if(e.isShiftDown()) {
+                                label.setLocation(label.getX(), label.getY() - 30);
+                            }
+                            else {
+                                label.setLocation(label.getX(), label.getY() - 15);
+                            }
+                        }
+                        case KeyEvent.VK_LEFT -> {
+                            if(label.getX() - 15 <= 0)
+                                label.setLocation(WIDTH - label.getWidth(), label.getY());
+                            if(e.isShiftDown()) {
+                                label.setLocation(label.getX() - 30, label.getY());
+                            }
+                            else {
+                                label.setLocation(label.getX() - 15, label.getY());
+                            }
+                        }
+                        case KeyEvent.VK_RIGHT -> {
+                            if(label.getX() + 15 >= WIDTH - label.getWidth())
+                                label.setLocation(0, label.getY());
+                            if(e.isShiftDown()) {
+                                label.setLocation(label.getX() + 30, label.getY());
+                            }
+                            else {
+                                label.setLocation(label.getX() + 15, label.getY());
+                            }
+                        }
                     }
-                    case KeyEvent.VK_UP -> {
-                        if(label.getY() - 15 <= 0)
-                            label.setLocation(label.getX(), HEIGHT-label.getHeight()*2+30);
-                        label.setLocation(label.getX(), label.getY() - 15);
-                    }
-                    case KeyEvent.VK_LEFT -> {
-                        if(label.getX() - 15 <= 0)
-                            label.setLocation(WIDTH - label.getWidth(), label.getY());
-                        label.setLocation(label.getX() - 15, label.getY());
-                    }
-                    case KeyEvent.VK_RIGHT -> {
-                        if(label.getX() + 15 >= WIDTH - label.getWidth())
-                            label.setLocation(0, label.getY());
-                        label.setLocation(label.getX() + 15, label.getY());
-                    }
-                }
             }
         });
 
